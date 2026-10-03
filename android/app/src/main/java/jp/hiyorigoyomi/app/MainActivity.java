@@ -1,0 +1,5 @@
+package jp.hiyorigoyomi.app;
+
+import com.getcapacitor.BridgeActivity;
+
+public class MainActivity extends BridgeActivity {}

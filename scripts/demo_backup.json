@@ -1,0 +1,1325 @@
+{
+ "version": 1,
+ "events": [
+  {
+   "id": "demo-1",
+   "date": "2026-10-01",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188401000,
+   "updatedAt": 1788188401000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-2",
+   "date": "2026-10-02",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188402000,
+   "updatedAt": 1788188402000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-3",
+   "date": "2026-10-03",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188403000,
+   "updatedAt": 1788188403000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-4",
+   "date": "2026-10-04",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188404000,
+   "updatedAt": 1788188404000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-5",
+   "date": "2026-10-05",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188405000,
+   "updatedAt": 1788188405000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-6",
+   "date": "2026-10-06",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188406000,
+   "updatedAt": 1788188406000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-7",
+   "date": "2026-10-07",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188407000,
+   "updatedAt": 1788188407000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-8",
+   "date": "2026-10-08",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188408000,
+   "updatedAt": 1788188408000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-9",
+   "date": "2026-10-09",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188409000,
+   "updatedAt": 1788188409000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-10",
+   "date": "2026-10-10",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188410000,
+   "updatedAt": 1788188410000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-11",
+   "date": "2026-10-11",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188411000,
+   "updatedAt": 1788188411000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-12",
+   "date": "2026-10-12",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188412000,
+   "updatedAt": 1788188412000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-13",
+   "date": "2026-10-13",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188413000,
+   "updatedAt": 1788188413000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-14",
+   "date": "2026-10-14",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188414000,
+   "updatedAt": 1788188414000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-15",
+   "date": "2026-10-15",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188415000,
+   "updatedAt": 1788188415000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-16",
+   "date": "2026-10-16",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188416000,
+   "updatedAt": 1788188416000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-17",
+   "date": "2026-10-17",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188417000,
+   "updatedAt": 1788188417000,
+   "stamp": "t-yakin"
+  },
+  {
+   "id": "demo-18",
+   "date": "2026-10-18",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188418000,
+   "updatedAt": 1788188418000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-19",
+   "date": "2026-10-19",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188419000,
+   "updatedAt": 1788188419000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-20",
+   "date": "2026-10-20",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188420000,
+   "updatedAt": 1788188420000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-21",
+   "date": "2026-10-21",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188421000,
+   "updatedAt": 1788188421000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-22",
+   "date": "2026-10-22",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188422000,
+   "updatedAt": 1788188422000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-23",
+   "date": "2026-10-23",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188423000,
+   "updatedAt": 1788188423000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-24",
+   "date": "2026-10-24",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188424000,
+   "updatedAt": 1788188424000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-25",
+   "date": "2026-10-25",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188425000,
+   "updatedAt": 1788188425000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-26",
+   "date": "2026-10-26",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188426000,
+   "updatedAt": 1788188426000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-27",
+   "date": "2026-10-27",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188427000,
+   "updatedAt": 1788188427000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-28",
+   "date": "2026-10-28",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188428000,
+   "updatedAt": 1788188428000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-29",
+   "date": "2026-10-29",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188429000,
+   "updatedAt": 1788188429000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-30",
+   "date": "2026-10-30",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188430000,
+   "updatedAt": 1788188430000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-31",
+   "date": "2026-09-01",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188431000,
+   "updatedAt": 1788188431000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-32",
+   "date": "2026-09-02",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188432000,
+   "updatedAt": 1788188432000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-33",
+   "date": "2026-09-03",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188433000,
+   "updatedAt": 1788188433000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-34",
+   "date": "2026-09-04",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188434000,
+   "updatedAt": 1788188434000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-35",
+   "date": "2026-09-05",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188435000,
+   "updatedAt": 1788188435000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-36",
+   "date": "2026-09-06",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188436000,
+   "updatedAt": 1788188436000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-37",
+   "date": "2026-09-07",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188437000,
+   "updatedAt": 1788188437000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-38",
+   "date": "2026-09-08",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188438000,
+   "updatedAt": 1788188438000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-39",
+   "date": "2026-09-09",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188439000,
+   "updatedAt": 1788188439000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-40",
+   "date": "2026-09-10",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188440000,
+   "updatedAt": 1788188440000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-41",
+   "date": "2026-09-11",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188441000,
+   "updatedAt": 1788188441000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-42",
+   "date": "2026-09-12",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188442000,
+   "updatedAt": 1788188442000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-43",
+   "date": "2026-09-13",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188443000,
+   "updatedAt": 1788188443000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-44",
+   "date": "2026-09-14",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188444000,
+   "updatedAt": 1788188444000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-45",
+   "date": "2026-09-15",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188445000,
+   "updatedAt": 1788188445000,
+   "stamp": "t-yakin"
+  },
+  {
+   "id": "demo-46",
+   "date": "2026-09-16",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188446000,
+   "updatedAt": 1788188446000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-47",
+   "date": "2026-09-17",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188447000,
+   "updatedAt": 1788188447000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-48",
+   "date": "2026-09-18",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188448000,
+   "updatedAt": 1788188448000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-49",
+   "date": "2026-09-19",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188449000,
+   "updatedAt": 1788188449000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-50",
+   "date": "2026-09-20",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188450000,
+   "updatedAt": 1788188450000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-51",
+   "date": "2026-09-21",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188451000,
+   "updatedAt": 1788188451000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-52",
+   "date": "2026-09-22",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188452000,
+   "updatedAt": 1788188452000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-53",
+   "date": "2026-09-23",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188453000,
+   "updatedAt": 1788188453000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-54",
+   "date": "2026-09-24",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188454000,
+   "updatedAt": 1788188454000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-55",
+   "date": "2026-09-25",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188455000,
+   "updatedAt": 1788188455000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-56",
+   "date": "2026-09-26",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188456000,
+   "updatedAt": 1788188456000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-57",
+   "date": "2026-09-27",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188457000,
+   "updatedAt": 1788188457000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-58",
+   "date": "2026-09-28",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188458000,
+   "updatedAt": 1788188458000,
+   "stamp": "t-yasumi"
+  },
+  {
+   "id": "demo-59",
+   "date": "2026-09-29",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188459000,
+   "updatedAt": 1788188459000,
+   "stamp": "t-hayaban"
+  },
+  {
+   "id": "demo-60",
+   "date": "2026-09-30",
+   "days": 1,
+   "allDay": true,
+   "title": "",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188460000,
+   "updatedAt": 1788188460000,
+   "stamp": "t-osoban"
+  },
+  {
+   "id": "demo-61",
+   "date": "2026-10-25",
+   "days": 1,
+   "allDay": true,
+   "title": "給料日",
+   "memo": "",
+   "color": 3,
+   "repeat": {
+    "freq": "monthly",
+    "interval": 1
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188461000,
+   "updatedAt": 1788188461000,
+   "stamp": "t-kyuryo"
+  },
+  {
+   "id": "demo-62",
+   "date": "2026-10-05",
+   "days": 1,
+   "allDay": true,
+   "title": "燃えるゴミ",
+   "memo": "",
+   "color": 1,
+   "repeat": {
+    "freq": "weekly",
+    "interval": 1
+   },
+   "exdates": [],
+   "notify": 240,
+   "createdAt": 1788188462000,
+   "updatedAt": 1788188462000
+  },
+  {
+   "id": "demo-63",
+   "date": "2026-10-08",
+   "days": 1,
+   "allDay": true,
+   "title": "燃えるゴミ",
+   "memo": "",
+   "color": 1,
+   "repeat": {
+    "freq": "weekly",
+    "interval": 1
+   },
+   "exdates": [],
+   "notify": 240,
+   "createdAt": 1788188463000,
+   "updatedAt": 1788188463000
+  },
+  {
+   "id": "demo-64",
+   "date": "2026-10-07",
+   "days": 1,
+   "allDay": false,
+   "title": "歯医者",
+   "memo": "左上の詰め物の続き。診察券を忘れずに",
+   "color": 4,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": 60,
+   "createdAt": 1788188464000,
+   "updatedAt": 1788188464000,
+   "stamp": "e-dentist",
+   "start": "10:30",
+   "end": "11:00"
+  },
+  {
+   "id": "demo-65",
+   "date": "2026-09-09",
+   "days": 1,
+   "allDay": false,
+   "title": "歯医者",
+   "memo": "クリーニング",
+   "color": 4,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188465000,
+   "updatedAt": 1788188465000,
+   "stamp": "e-dentist",
+   "start": "10:30",
+   "end": "11:00"
+  },
+  {
+   "id": "demo-66",
+   "date": "2026-08-05",
+   "days": 1,
+   "allDay": false,
+   "title": "歯医者",
+   "memo": "初診",
+   "color": 4,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188466000,
+   "updatedAt": 1788188466000,
+   "stamp": "e-dentist",
+   "start": "18:00",
+   "end": "18:30"
+  },
+  {
+   "id": "demo-67",
+   "date": "2026-10-12",
+   "days": 1,
+   "allDay": true,
+   "title": "母の誕生日",
+   "memo": "",
+   "color": 7,
+   "repeat": {
+    "freq": "yearly",
+    "interval": 1
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188467000,
+   "updatedAt": 1788188467000,
+   "stamp": "e-birthday"
+  },
+  {
+   "id": "demo-68",
+   "date": "2026-10-16",
+   "days": 1,
+   "allDay": false,
+   "title": "美容院",
+   "memo": "カットとカラー",
+   "color": 6,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188468000,
+   "updatedAt": 1788188468000,
+   "stamp": "e-hair",
+   "start": "13:00",
+   "end": "14:30"
+  },
+  {
+   "id": "demo-69",
+   "date": "2026-10-17",
+   "days": 2,
+   "allDay": true,
+   "title": "温泉旅行",
+   "memo": "宿は駅から送迎あり。16時チェックイン",
+   "color": 0,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188469000,
+   "updatedAt": 1788188469000,
+   "stamp": "e-travel"
+  },
+  {
+   "id": "demo-70",
+   "date": "2026-10-21",
+   "days": 1,
+   "allDay": false,
+   "title": "同窓会",
+   "memo": "会費 5,000円",
+   "color": 1,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188470000,
+   "updatedAt": 1788188470000,
+   "stamp": "e-drink",
+   "start": "19:00",
+   "end": "21:30"
+  },
+  {
+   "id": "demo-71",
+   "date": "2026-10-03",
+   "days": 1,
+   "allDay": false,
+   "title": "買い物",
+   "memo": "",
+   "color": 2,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188471000,
+   "updatedAt": 1788188471000,
+   "stamp": "e-shopping",
+   "start": "15:00"
+  },
+  {
+   "id": "demo-72",
+   "date": "2026-10-03",
+   "days": 1,
+   "allDay": false,
+   "title": "通院",
+   "memo": "血液検査の結果を聞く",
+   "color": 4,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188472000,
+   "updatedAt": 1788188472000,
+   "stamp": "e-hospital",
+   "start": "09:30"
+  },
+  {
+   "id": "demo-73",
+   "date": "2026-10-28",
+   "days": 1,
+   "allDay": false,
+   "title": "ライブ",
+   "memo": "整理番号 A-120",
+   "color": 6,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188473000,
+   "updatedAt": 1788188473000,
+   "stamp": "e-star",
+   "start": "18:30"
+  },
+  {
+   "id": "demo-74",
+   "date": "2026-10-30",
+   "days": 1,
+   "allDay": false,
+   "title": "資格の勉強",
+   "memo": "",
+   "color": 5,
+   "repeat": {
+    "freq": "weekly",
+    "interval": 1
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188474000,
+   "updatedAt": 1788188474000,
+   "stamp": "e-study",
+   "start": "20:00",
+   "end": "21:00"
+  },
+  {
+   "id": "demo-75",
+   "date": "2026-11-03",
+   "days": 1,
+   "allDay": true,
+   "title": "ピクニック",
+   "memo": "",
+   "color": 3,
+   "repeat": {
+    "freq": "none"
+   },
+   "exdates": [],
+   "notify": null,
+   "createdAt": 1788188475000,
+   "updatedAt": 1788188475000,
+   "stamp": "e-meal"
+  }
+ ],
+ "dayMemos": {
+  "2026-10-03": "牛乳・卵・食パン\n郵便局に寄る",
+  "2026-10-17": "着替え2日分・充電器"
+ },
+ "settings": {
+  "weekStart": 0,
+  "showRokuyo": true,
+  "theme": "kinari",
+  "colorNames": [
+   "あか",
+   "だいだい",
+   "きいろ",
+   "みどり",
+   "あおみどり",
+   "あお",
+   "むらさき",
+   "ももいろ",
+   "はいいろ"
+  ],
+  "defaultNotify": null,
+  "digest": {
+   "on": false,
+   "time": "07:30"
+  },
+  "autoBackup": false,
+  "onboarded": true
+ }
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ひよりごよみ</string>
+    <string name="title_activity_main">ひよりごよみ</string>
+    <string name="package_name">jp.hiyorigoyomi.app</string>
+    <string name="custom_url_scheme">jp.hiyorigoyomi.app</string>
+</resources>

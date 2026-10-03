@@ -1,0 +1,11 @@
+{
+  "appId": "jp.hiyorigoyomi.app",
+  "appName": "ひよりごよみ",
+  "webDir": "dist",
+  "backgroundColor": "#fbf8f1",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "never" },
+  "plugins": {
+    "LocalNotifications": { "iconColor": "#d9822b" }
+  }
+}
