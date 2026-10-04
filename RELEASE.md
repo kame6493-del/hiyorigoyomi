@@ -115,3 +115,10 @@ X は旧Yahoo!カレンダー/LINEカレンダーに触れた投稿 63件(10-01�
 - src/ui: 画面
 - scripts: e2e.py / store_shots.py / make_icons.py / make_demo.py / build-android.ps1
 - work: 声の集計と照合データの取得(count_voices.py / make_fixtures.py と取得した元データ)
+
+## Google Play(2026-10-04)
+- アプリ作成: app id 4972544160823766398、「ひよりごよみ スタンプで貼るカレンダー」、jp.hiyorigoyomi.app、日本語・アプリ・無料
+- プライバシーポリシー: https://kame6493-del.github.io/apps/hiyorigoyomi/privacy.html
+- クローズドテスト Alpha(トラック 4700761072959437283): 日本・テスター AndroidClosedJP と nigatecho-testers・フィードバック kame6493@gmail.com
+- 2026-10-04 審査に送信(14件)。申告: 広告なし/ログイン不要/18歳以上/レーティング3歳以上/データセーフティ=購入履歴のみ/広告ID なし/行政 いいえ/金融なし/健康なし。ストア設定 仕事効率化
+- 1.0.1 (vc2): RevenueCat Android キー入り。AAB: C:\Users\yuichi1\Downloads\ひよりごよみ_2026-10-03\app\releases\hiyorigoyomi-1.0.1-vc2-release.aab (6.71 MB, 7,032,089 バイト)
