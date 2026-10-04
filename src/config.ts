@@ -10,7 +10,7 @@ export const BILLING = {
   productId: 'hiyori_plus_lifetime',
   entitlement: 'plus',
   displayPrice: '¥500',
-  revenuecatKeys: { ios: 'appl_fvyzmblWsVppvvZXFrNDzhKMAmt', android: '' },
+  revenuecatKeys: { ios: 'appl_fvyzmblWsVppvvZXFrNDzhKMAmt', android: 'goog_MFBVCINrnINDwbNkxFKpLpKJvgD' },
 };
 
 export const APP = {
