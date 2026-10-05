@@ -1,0 +1,31 @@
+1. Screen recording: attached to our reply in App Store Connect. It starts from app launch and shows the first-run welcome sheet, the month calendar with Japanese national holidays and rokuyo, adding an event (title, color, time), copying the event to other days, placing stamps on several days, searching past and future events, and the In-App Purchase screen (Hiyori Plus).
+We are a solo developer and do not own a physical iOS device, so the recording was made on the iOS Simulator (newest iPhone model, latest iOS available in Xcode) with the same build configuration. The red circles in the video mark each tap. The app has no account and no server; all data stays on the device, so the behavior is the same on a physical device. The only device features are optional: local notifications for event reminders, and reading the iOS Calendar when the user taps "端末のカレンダーから予定を読み込む" in Settings (read-only, with the system permission prompt). These are not shown in the video. Sandbox purchases can be tested with the In-App Purchase submitted together with this version. The simulator uses the U.S. storefront, so the price shown may be in USD; the price in Japan is JPY 500.
+
+2. Purpose and audience
+Hiyori Goyomi (ひよりごよみ) is a simple month-view calendar / schedule book for Japanese users who want a calendar without registering an account. Users place events and stamps (e.g. shift marks such as 休 / 早 / 遅, payday, hospital visits, birthdays) on dates. The calendar shows Japanese national holidays (including substitute holidays), rokuyo (大安, 仏滅, etc.) and the old lunar calendar date; these are all calculated on the device, so they are shown without a network connection.
+
+3. How to use (no login or account is needed)
+- Launch the app. A short welcome sheet explains that no account is needed; tap "はじめる".
+- Tap a date to see that day's events, lunar date and a memo field at the bottom.
+- Tap "＋ 予定を追加" to add an event: title, stamp, one of 9 colors, all-day or time, number of days, repeat (daily / weekly / monthly / yearly, every n, end date), reminder and memo.
+- Tap "コピー" next to an event, then tap other dates to paste it.
+- Tap "スタンプを押す", choose a stamp, then tap dates to place it.
+- Search (magnifier icon) finds past and future events and day memos.
+- Settings (gear icon): start of week, show/hide rokuyo, themes, color names, default reminder time, backup export/import to a file, read events from the device calendar (read-only), privacy policy.
+Basic features (adding, editing, copying, repeating, searching, reminders, backup) are free. There are no ads.
+
+4. External services
+- Apple In-App Purchase, managed through RevenueCat (purchase validation and restore). RevenueCat receives only an anonymous app user ID and the App Store transaction.
+- No other servers, no login service, no analytics, no ads, no AI services. Events, memos and settings are stored only on the device. Reminders are local notifications scheduled on the device. Backup files are written only to a location the user chooses (via the share sheet); the automatic backup (Hiyori Plus) is saved in the app's Documents folder on the device.
+
+5. Regional differences
+The app is intended for Japan. The content is in Japanese and holidays and rokuyo follow the Japanese calendar. The app works the same in every region.
+
+6. Third-party material
+- The app contains no third-party content or data files. Japanese national holidays are calculated on the device from the rules in the Act on National Holidays (国民の祝日に関する法律); statutes are not subject to copyright in Japan (Copyright Act, Article 13). Rokuyo and the lunar calendar are calculated on the device with published astronomical formulas (J. Meeus, Astronomical Algorithms; main terms of VSOP87). Official data from the Cabinet Office and the National Astronomical Observatory of Japan were used only in our automated tests to verify the calculations and are not included in the app.
+- Emoji stamps are drawn with the system emoji font of the device; letter stamps are our own design.
+- Open-source libraries (MIT license): Capacitor and its official plugins, @ebarooni/capacitor-calendar, @revenuecat/purchases-capacitor, React.
+
+7. In-App Purchase
+One non-consumable product, "ひよりプラス" (Hiyori Plus, product ID hiyori_plus_lifetime), JPY 500, one-time purchase (no subscription). It unlocks all 136 stamps (20 are free), 8 themes (2 are free), naming colors (e.g. "work", "family"), a daily summary notification of today's events, and automatic daily backup (7 days kept).
+How to reach it: Calendar > "スタンプを押す" > tap a stamp marked "プラス" (or the "ひよりプラスで、ほかに…種のスタンプが使えます" note). Or Settings (gear icon) > tap the "ひよりプラス" card, or tap a locked theme. The purchase screen shows the free / plus comparison table and the buy button. "以前に買った方はこちら(購入の復元)" (restore) is on the purchase screen.
