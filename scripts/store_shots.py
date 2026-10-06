@@ -49,43 +49,45 @@ def snap(page, name):
     page.screenshot(path=os.path.join(RAW, name + '.png'))
 
 
-with sync_playwright() as p:
-    b = p.chromium.launch()
-    ctx = b.new_context(viewport={'width': 430, 'height': 932}, device_scale_factor=3, locale='ja-JP', timezone_id='Asia/Tokyo')
-    page = ctx.new_page()
-    prepare(page, PROD)
-    cell(page, '2026-10-07').click()
-    snap(page, '1_month')
-    # 履歴から入力
-    cell(page, '2026-10-14').click()
-    page.click('text=＋ 予定を追加')
-    page.click('.hist-chip >> text=美容院')
-    snap(page, '2_history')
-    page.click('.sheet-head >> text=やめる')
-    # スタンプを押していく
-    page.click('text=スタンプを押す')
-    page.click('.stamp-cell[aria-label="休み"]')
-    page.wait_for_timeout(300)
-    page.click('text=ほかのスタンプ')
-    page.click('.tabs >> text=予定')
-    snap(page, '3_stamps')
-    page.click('.stamp-cell[aria-label="誕生日"]')
-    page.click('.paste-bar >> text=おわる')
-    # 検索
-    page.click('button[aria-label="さがす"]')
-    page.fill('.search-box input', '歯医者')
-    page.wait_for_selector('.hit')
-    page.locator('.search-box input').blur()
-    snap(page, '4_search')
-    page.click('text=‹ もどる')
-    b2 = ctx.new_page()
-    prepare(b2, DEV, plus=True)
-    cell(b2, '2026-10-17').click()
-    snap(b2, '5_sakura')
-    b.close()
+if '--no-capture' not in sys.argv:  # --no-capture: store/raw の画面はそのままで、見出しだけ作り直す
+    with sync_playwright() as p:
+        b = p.chromium.launch()
+        ctx = b.new_context(viewport={'width': 430, 'height': 932}, device_scale_factor=3, locale='ja-JP', timezone_id='Asia/Tokyo')
+        page = ctx.new_page()
+        prepare(page, PROD)
+        cell(page, '2026-10-07').click()
+        snap(page, '1_month')
+        # 履歴から入力
+        cell(page, '2026-10-14').click()
+        page.click('text=＋ 予定を追加')
+        page.click('.hist-chip >> text=美容院')
+        snap(page, '2_history')
+        page.click('.sheet-head >> text=やめる')
+        # スタンプを押していく
+        page.click('text=スタンプを押す')
+        page.click('.stamp-cell[aria-label="休み"]')
+        page.wait_for_timeout(300)
+        page.click('text=ほかのスタンプ')
+        page.click('.tabs >> text=予定')
+        snap(page, '3_stamps')
+        page.click('.stamp-cell[aria-label="誕生日"]')
+        page.click('.paste-bar >> text=おわる')
+        # 検索
+        page.click('button[aria-label="さがす"]')
+        page.fill('.search-box input', '歯医者')
+        page.wait_for_selector('.hit')
+        page.locator('.search-box input').blur()
+        snap(page, '4_search')
+        page.click('text=‹ もどる')
+        b2 = ctx.new_page()
+        prepare(b2, DEV, plus=True)
+        cell(b2, '2026-10-17').click()
+        snap(b2, '5_sakura')
+        b.close()
+
 
 CAPS = [
-    ('1_month', 'スタンプで、ひと目でわかる月の表', '祝日・六曜・旧暦も。アカウント登録なし'),
+    ('1_month', '大安・仏滅と旧暦が、月の表に', '六曜と旧暦は天文計算、祝日は祝日法から'),
     ('2_history', 'いつもの予定は、履歴からワンタップ', '時刻・色・スタンプまでそのまま入る'),
     ('3_stamps', 'スタンプを選んで、日付をぺたぺた', 'シフトもゴミの日も、押すだけ'),
     ('4_search', '前の通院はいつだった?', '過去の予定もメモも、すぐ探せる'),
