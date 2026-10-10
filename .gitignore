@@ -36,3 +36,13 @@ scripts/e2e_out/
 **/store/raw/
 scripts/__pycache__/
 
+
+# 2026-10-10 見た目の作り直しの作業物(大きいので入れない。元は Downloads\hiyori_ref_*.png / hiyori_all_*.png)
+**/store/raw_play/
+work/redesign/ref*.png
+work/redesign/crops/
+work/redesign/peek/
+work/redesign/fonts/*.ttf
+work/redesign/*.png
+!work/redesign/icon_src_1024.png
+docs/compare_redesign_*.png

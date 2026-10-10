@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { STAMPS, THEMES } from '../domain/catalog';
 import { purchase, restore, type BillingState } from '../platform/billing';
 import { BILLING } from '../config';
-import { StampGlyph } from '../App';
+import { Art, BackIcon, ChevronR } from './icons';
 
 export function Paywall(p: { billing: BillingState; onClose: () => void; onBought: () => void; setBilling: (b: BillingState) => void }) {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
   const price = p.billing.status === 'ready' ? p.billing.price ?? BILLING.displayPrice : BILLING.displayPrice;
   const freeStamps = STAMPS.filter((s) => s.free).length;
-  const preview = STAMPS.filter((s) => !s.free).filter((_, i) => i % 6 === 0).slice(0, 12);
+  const freeThemes = THEMES.filter((t) => t.free).length;
+  const m = /^([^\d]*)([\d,.]+)(.*)$/.exec(price);
 
   const buy = async () => {
     setBusy(true);
@@ -35,28 +36,61 @@ export function Paywall(p: { billing: BillingState; onClose: () => void; onBough
     }
   };
 
+  const feats: [string, string, string][] = [
+    ['ic_gift', `すべてのスタンプ ${STAMPS.length}種`, `いま使える${freeStamps}種に、季節・暮らし・あそびなどを足して`],
+    ['ic_palette', `${THEMES.length}種類の着せ替え`, `いまの${freeThemes}種に、さくら・わかば・そら など`],
+    ['ic_colors', '9色に名前を付ける', 'さくら・もも・みかん… を「仕事」「家族」に'],
+    ['ic_bell', '今日の予定のまとめ通知', '予定のある日の朝に、その日の予定をお知らせ'],
+    ['ic_export', '自動バックアップ', '1日1回、端末の「ファイル」に7日分を保存'],
+    ['ic_ad', '広告なし', 'プラスでも、いまのままでも、広告は出ません'],
+  ];
+
   return (
     <div className="page paywall">
-      <header className="page-head">
-        <button className="link" onClick={p.onClose}>
-          ‹ もどる
+      <header className="page-head ghost">
+        <button className="icon-btn" onClick={p.onClose} aria-label="もどる">
+          <BackIcon />
         </button>
-        <h2>ひよりプラス</h2>
+        <span />
         <span />
       </header>
       <section className="pw-hero">
-        <p className="pw-kicker">買い切り・月額なし・広告なし</p>
-        <h2>
-          あのころのスタンプ帳を、
-          <br />
-          もう一度。
-        </h2>
-        <div className="pw-stamps">
-          {preview.map((s) => (
-            <StampGlyph key={s.id} id={s.id} size="lg" />
-          ))}
-        </div>
+        <Art name="pay_left" className="pw-l" />
+        <Art name="pay_right" className="pw-r" />
+        <Art name="crown" className="pw-crown" />
+        <h2>ひよりプラス</h2>
+        <p className="pw-kicker">もっと、日々をかわいく豊かに</p>
+        <p className="pw-sub">一度のご購入で、すべての機能が使えます</p>
+        <Art name="pay_hills" className="pw-hills" />
       </section>
+      <section className="pw-price card">
+        <Art name="laurel_l" className="pw-laurel l" />
+        <Art name="laurel_r" className="pw-laurel r" />
+        <span className="pp-name">ひよりプラス</span>
+        <span className="pp-price">
+          {m ? (
+            <>
+              <small>{m[1]}</small>
+              {m[2]}
+              <small>{m[3]}</small>
+            </>
+          ) : (
+            price
+          )}
+        </span>
+        <span className="pp-badge">買い切り・月額なし</span>
+      </section>
+      <ul className="pw-feats">
+        {feats.map(([ic, t, s]) => (
+          <li key={t} className="card">
+            <Art name={ic} className="pf-ic" />
+            <span>
+              <b>{t}</b>
+              <small>{s}</small>
+            </span>
+          </li>
+        ))}
+      </ul>
       <table className="pw-table">
         <thead>
           <tr>
@@ -93,7 +127,7 @@ export function Paywall(p: { billing: BillingState; onClose: () => void; onBough
           </tr>
           <tr>
             <td>着せ替え</td>
-            <td>{THEMES.filter((t) => t.free).length}種</td>
+            <td>{freeThemes}種</td>
             <td>{THEMES.length}種</td>
           </tr>
           <tr>
@@ -120,8 +154,9 @@ export function Paywall(p: { billing: BillingState; onClose: () => void; onBough
       </table>
       <div className="pw-cta">
         {p.billing.status === 'ready' ? (
-          <button className="btn primary wide big" disabled={busy || p.billing.plus} onClick={buy}>
-            {p.billing.plus ? '購入済みです' : busy ? '処理中…' : `${price} で買う(1回だけ)`}
+          <button className="btn primary wide big arrow" disabled={busy || p.billing.plus} onClick={buy}>
+            {p.billing.plus ? '購入済みです' : busy ? '処理中…' : `${price}で ひよりプラスを購入`}
+            {!p.billing.plus && !busy && <ChevronR />}
           </button>
         ) : (
           <button className="btn wide big" disabled>

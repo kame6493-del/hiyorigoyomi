@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { App as CapApp } from '@capacitor/app';
 import { addDays, parse, today, type YMD } from './domain/date';
 import { copyTo, makeEvent, normalize } from './domain/events';
-import { stampById, themeById } from './domain/catalog';
+import { STAMPS, artUrl, stampById, themeById } from './domain/catalog';
 import type { AppData, CalEvent } from './domain/types';
 import { loadData, saveData } from './platform/storage';
 import { loadBilling, type BillingState } from './platform/billing';
@@ -16,6 +16,7 @@ import { Paywall } from './ui/Paywall';
 import { StampPicker } from './ui/StampPicker';
 import { Welcome } from './ui/Welcome';
 import { Toast } from './ui/Toast';
+import { CalendarIcon, DotsIcon, PlusIcon, SearchIcon, StampIcon } from './ui/icons';
 
 export type Page = 'month' | 'search' | 'settings' | 'paywall';
 /** 月の表で日付を押したときの動き: 普通 / スタンプを押していく / 予定を貼っていく */
@@ -31,6 +32,7 @@ export default function App() {
     return { y: t.y, m: t.m };
   });
   const [selected, setSelected] = useState<YMD>(today());
+  const [touched, setTouched] = useState(false);
   const [edit, setEdit] = useState<EditTarget | null>(null);
   const [paste, setPaste] = useState<PasteMode>(null);
   const [pickStampFor, setPickStampFor] = useState<null | 'paste'>(null);
@@ -52,6 +54,7 @@ export default function App() {
     const root = document.documentElement;
     for (const [k, v] of Object.entries(theme.vars)) root.style.setProperty(k, v);
     root.dataset.dark = theme.dark ? '1' : '0';
+    root.dataset.theme = theme.id;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme.vars['--bg']);
   }, [theme]);
 
@@ -97,9 +100,16 @@ export default function App() {
     return () => void h.then((x) => x.remove());
   }, [edit, paste, page, pickStampFor]);
 
+  // 水彩の絵は先に読んでおく(はじめての案内・空の月で一瞬白くならないように)
+  useEffect(() => {
+    for (const s of STAMPS) if (s.img) new Image().src = artUrl(s.img);
+  }, []);
+
+  const toastTimer = useRef<number | undefined>(undefined);
   const showToast = (s: string) => {
     setToast(s);
-    window.setTimeout(() => setToast(''), 2200);
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(''), 2200);
   };
 
   const openPaywall = (from: Page = page) => {
@@ -111,6 +121,7 @@ export default function App() {
     const p = parse(d);
     setCursor({ y: p.y, m: p.m });
     setSelected(d);
+    setTouched(true);
     setPage('month');
   };
 
@@ -130,6 +141,7 @@ export default function App() {
       return;
     }
     setSelected(d);
+    setTouched(true);
   };
 
   const shiftMonth = (n: number) => {
@@ -140,8 +152,31 @@ export default function App() {
   };
 
   const counts = useMemo(() => (data ? data.events.length : 0), [data]);
+  /** 最近使ったスタンプ(新しい順・重なりなし) */
+  const recentStamps = useMemo(() => {
+    if (!data) return [];
+    const seen: string[] = [];
+    for (const e of [...data.events].sort((a, b) => b.updatedAt - a.updatedAt)) {
+      if (e.stamp && !seen.includes(e.stamp) && stampById(e.stamp)) seen.push(e.stamp);
+      if (seen.length >= 12) break;
+    }
+    return seen;
+  }, [data]);
+  /** よく使うスタンプ(使った回数の多い順) */
+  const oftenStamps = useMemo(() => {
+    if (!data) return [];
+    const n = new Map<string, number>();
+    for (const e of data.events) if (e.stamp && stampById(e.stamp)) n.set(e.stamp, (n.get(e.stamp) ?? 0) + 1);
+    return [...n.entries()].sort((a, b) => b[1] - a[1]).map(([id]) => id);
+  }, [data]);
 
   if (!data) return <div className="boot" />;
+
+  const isEmpty = data.events.length === 0 && Object.keys(data.dayMemos).length === 0;
+  const startStamp = (id: string) => {
+    setPaste({ kind: 'stamp', stampId: id, count: 0 });
+    showToast('貼りたい日をタップしてください');
+  };
 
   return (
     <div className={`app page-${page}`}>
@@ -153,18 +188,19 @@ export default function App() {
             m={cursor.m}
             selected={selected}
             paste={paste}
+            empty={data.events.length === 0}
             onDay={onDayTap}
             onShift={shiftMonth}
             onToday={() => goMonth(today())}
-            onSearch={() => setPage('search')}
             onSettings={() => setPage('settings')}
+            onStampMode={() => setPickStampFor('paste')}
           />
           {paste ? (
             <div className="paste-bar" role="status">
               <div className="paste-text">
                 {paste.kind === 'stamp' ? (
                   <>
-                    <StampGlyph id={paste.stampId} /> を押す日をタップ
+                    <StampGlyph id={paste.stampId} size="md" /> を貼る日をタップ
                   </>
                 ) : (
                   <>「{paste.ev.title || stampById(paste.ev.stamp)?.label}」を貼る日をタップ</>
@@ -184,9 +220,10 @@ export default function App() {
             <DayPanel
               data={data}
               day={selected}
+              start={isEmpty && !touched}
+              onStartStamp={startStamp}
+              onPickStamp={() => setPickStampFor('paste')}
               onEdit={(ev, occ) => setEdit({ ev, occ })}
-              onAdd={() => setEdit({ date: selected })}
-              onStampMode={() => setPickStampFor('paste')}
               onMemo={(text) =>
                 update((d) => {
                   const dayMemos = { ...d.dayMemos };
@@ -203,6 +240,30 @@ export default function App() {
               onNext={() => onDaySelectShift(1)}
             />
           )}
+          <nav className="tabbar" aria-label="メニュー">
+            <button className="tab on" aria-label="カレンダー" onClick={() => goMonth(today())}>
+              <CalendarIcon />
+              <span>カレンダー</span>
+            </button>
+            <button className="tab" aria-label="さがす" onClick={() => setPage('search')}>
+              <SearchIcon size={24} />
+              <span>さがす</span>
+            </button>
+            <button className="tab add" aria-label="予定追加" onClick={() => setEdit({ date: selected })}>
+              <span className="add-circle">
+                <PlusIcon />
+              </span>
+              <span>予定追加</span>
+            </button>
+            <button className="tab" aria-label="スタンプ" onClick={() => setPickStampFor('paste')}>
+              <StampIcon size={24} />
+              <span>スタンプ</span>
+            </button>
+            <button className="tab" aria-label="その他" onClick={() => setPage('settings')}>
+              <DotsIcon />
+              <span>その他</span>
+            </button>
+          </nav>
         </>
       )}
       {page === 'search' && <SearchPage data={data} onClose={() => setPage('month')} onPick={(d) => goMonth(d)} />}
@@ -240,6 +301,8 @@ export default function App() {
           target={edit}
           data={data}
           plus={plus}
+          recent={recentStamps}
+          often={oftenStamps}
           onClose={() => setEdit(null)}
           update={update}
           onPaywall={() => {
@@ -257,6 +320,8 @@ export default function App() {
       {pickStampFor && (
         <StampPicker
           plus={plus}
+          recent={recentStamps}
+          often={oftenStamps}
           selected={paste?.kind === 'stamp' ? paste.stampId : undefined}
           onClose={() => setPickStampFor(null)}
           onPick={(id) => {
@@ -289,20 +354,26 @@ export default function App() {
     const p = parse(d);
     if (p.m !== cursor.m || p.y !== cursor.y) setCursor({ y: p.y, m: p.m });
     setSelected(d);
+    setTouched(true);
   }
 }
 
-export function StampGlyph({ id, size }: { id?: string; size?: 'sm' | 'md' | 'lg' }) {
+/** やわらかい丸で出す文字スタンプ(見本の「休」と同じ、淡い丸に色の字) */
+const SOFT = new Set(['t-yasumi', 't-yuukyu', 't-ake']);
+
+export function StampGlyph({ id, size }: { id?: string; size?: 'sm' | 'md' | 'lg' | 'xl' | 'cell' }) {
   const st = stampById(id);
   if (!st) return null;
+  const sz = size ?? 'sm';
+  if (st.img) return <img className={`istamp ${sz}`} src={artUrl(st.img)} alt={st.label} draggable={false} />;
   if (st.kind === 'text')
     return (
-      <span className={`tstamp ${size ?? 'sm'}`} style={{ background: st.bg }} aria-label={st.label}>
+      <span className={`tstamp ${sz} ${SOFT.has(st.id) ? 'soft' : ''}`} style={{ ['--sc' as string]: st.bg }} aria-label={st.label} role="img">
         {st.glyph}
       </span>
     );
   return (
-    <span className={`estamp ${size ?? 'sm'}`} aria-label={st.label}>
+    <span className={`estamp ${sz}`} aria-label={st.label} role="img">
       {st.glyph}
     </span>
   );

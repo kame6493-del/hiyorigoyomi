@@ -48,8 +48,8 @@ try {
   if ($p.ExitCode -ne 0) { Get-Content "$env:TEMP\hg_release_err.txt" -Tail 40; throw "Gradle が失敗しました (exit $($p.ExitCode))" }
   $out = Join-Path $repo 'releases'
   New-Item -ItemType Directory -Force $out | Out-Null
-  Copy-Item "$proj\app\build\outputs\bundle\release\app-release.aab" "$out\hiyorigoyomi-1.0.1-vc2-release.aab" -Force
-  Copy-Item "$proj\app\build\outputs\apk\release\app-release.apk" "$out\hiyorigoyomi-1.0.1-vc2-release.apk" -Force
+  Copy-Item "$proj\app\build\outputs\bundle\release\app-release.aab" "$out\hiyorigoyomi-1.1.0-vc3-release.aab" -Force
+  Copy-Item "$proj\app\build\outputs\apk\release\app-release.apk" "$out\hiyorigoyomi-1.1.0-vc3-release.apk" -Force
   Write-Output "出力: $out"
 } finally {
   subst $drive /D

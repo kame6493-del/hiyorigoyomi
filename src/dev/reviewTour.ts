@@ -75,6 +75,10 @@ const cellSel = (d: string) => `.cell[data-date="${d}"]`;
 export async function runReviewTour() {
   await sleep(3500); // はじめての案内を見せる
   await tap('button', text('はじめる'), 2500);
+  // 使いかたガイド 3枚
+  await tap('button', text('つぎへ'), 1800);
+  await tap('button', text('つぎへ'), 1800);
+  await tap('button', text('カレンダーをひらく'), 2200);
 
   const t = today();
   // 今日 → 来月 → 今月(祝日・六曜を見せる)
@@ -85,19 +89,21 @@ export async function runReviewTour() {
   // 予定を足す(2日後・時刻・色・お知らせ)
   const d1 = addDays(t, 2);
   await tap(cellSel(d1), undefined, 1200);
-  if (await tap('button', text('＋ 予定を追加'), 1500)) {
+  if (await tap('button', label('予定追加'), 1500)) {
     const title = (await find('.title-input')) as HTMLInputElement | null;
     if (title) await typeInto(title, '歯医者');
-    await tap('button', label('みどり'), 800);
+    if (await tap('.ed-row', text('色'), 800)) await tap('button', label('若葉'), 800);
+    await tap('.ed-row', text('日時'), 800);
     if (await tap('button', text('時刻を決める'), 1000)) {
       const st = document.querySelector<HTMLInputElement>('input[aria-label="始まり"]');
       const en = document.querySelector<HTMLInputElement>('input[aria-label="終わり"]');
       if (st) { tapMark(st); setValue(st, '18:00'); await sleep(700); }
       if (en) { tapMark(en); setValue(en, '19:00'); await sleep(700); }
     }
+    await tap('input', label('お知らせする'), 800);
     const nt = document.querySelector<HTMLSelectElement>('#ed-notify');
     if (nt && [...nt.options].some((o) => o.value === '60')) { nt.scrollIntoView({ block: 'center', behavior: 'smooth' }); await sleep(500); tapMark(nt); setValue(nt, '60'); await sleep(1200); }
-    await tap('.sheet-head button', text('保存'), 2200);
+    await tap('.screen-foot button', text('保存する'), 2200);
   }
 
   // ほかの日にコピー
@@ -108,7 +114,7 @@ export async function runReviewTour() {
   }
 
   // スタンプをぺたぺた貼る
-  if (await tap('button', text('スタンプを押す'), 1500)) {
+  if (await tap('button', label('スタンプ'), 1500)) {
     await tap('.stamp-cell', label('休み'), 1200);
     for (const k of [1, 4, 8]) await tap(cellSel(addDays(t, k)), undefined, 700);
     await sleep(800);
@@ -120,11 +126,11 @@ export async function runReviewTour() {
     const box = (await find('.search-box input')) as HTMLInputElement | null;
     if (box) await typeInto(box, '歯医者');
     await sleep(1500);
-    if (!(await tap('.hit', undefined, 2000))) await tap('button', text('‹ もどる'), 1500);
+    if (!(await tap('.hit', undefined, 2000))) await tap('button', label('もどる'), 1500);
   }
 
   // 有料のスタンプ(あそび)→ ひよりプラスの購入画面
-  if (await tap('button', text('スタンプを押す'), 1500)) {
+  if (await tap('button', label('スタンプ'), 1500)) {
     await tap('.tabs button, .tabs [role="tab"]', text('あそび'), 1500);
     if (!(await tap('.stamp-cell.locked', undefined, 3000))) await tap('.plus-note', undefined, 3000);
   } else {
@@ -138,6 +144,6 @@ export async function runReviewTour() {
   }
   await sleep(2500);
   // 購入ボタン(シミュレーターでストアの商品が取れたときだけ押せる)
-  await tap('.pw-cta button.primary', text('買う'), 10000);
+  await tap('.pw-cta button.primary', text('購入'), 10000);
   await sleep(6000);
 }

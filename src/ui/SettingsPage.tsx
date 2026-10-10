@@ -1,12 +1,21 @@
 import { useRef, useState } from 'react';
-import { COLORS, merge, normalize } from '../domain/events';
-import { THEMES } from '../domain/catalog';
+import { Capacitor } from '@capacitor/core';
+import { COLORS, COLOR_ORDER, merge, normalize } from '../domain/events';
+import { THEMES, artUrl } from '../domain/catalog';
 import { NOTIFY_TIMED } from '../domain/notify';
 import type { AppData } from '../domain/types';
 import type { BillingState } from '../platform/billing';
 import { isDevMock, setMockPlus } from '../platform/billing';
 import { exportBackup, importFromDevice, rescheduleNotifications } from '../platform/native';
 import { PRIVACY_TEXT } from './privacy';
+import { Art, BackIcon, BellIcon, CalendarIcon, CheckIcon, ChevronR } from './icons';
+
+/** 端末のカレンダーの言い方(Android の画面に iPhone の名前を出さない) */
+function deviceCalendarNote(): string {
+  const pf = Capacitor.getPlatform();
+  if (pf === 'ios') return 'iPhone のカレンダー・Google カレンダーなど(前後1〜2年分・読むだけ)';
+  return '端末のカレンダー・Google カレンダーなど(前後1〜2年分・読むだけ)';
+}
 
 export function SettingsPage(p: {
   data: AppData;
@@ -44,22 +53,54 @@ export function SettingsPage(p: {
   return (
     <div className="page settings-page">
       <header className="page-head">
-        <button className="link" onClick={p.onClose}>
-          ‹ もどる
+        <button className="icon-btn" onClick={p.onClose} aria-label="もどる">
+          <BackIcon />
         </button>
         <h2>設定</h2>
         <span />
       </header>
 
       <button className={`plus-card ${plus ? 'owned' : ''}`} onClick={plus ? undefined : p.onPaywall}>
-        <div className="pc-title">{plus ? 'ひよりプラス 利用中' : 'ひよりプラス'}</div>
-        <div className="pc-sub">{plus ? 'ありがとうございます。すべてのスタンプと着せ替えが使えます' : 'スタンプ全種・着せ替え・今日の予定のまとめ通知・自動バックアップ'}</div>
-        {!plus && <div className="pc-price">買い切り {p.billing.status === 'ready' && p.billing.price ? p.billing.price : '¥500'}</div>}
+        <Art name="crown" className="pc-crown" />
+        <span className="pc-text">
+          <span className="pc-title">{plus ? 'ひよりプラス 利用中' : 'ひよりプラス'}</span>
+          <span className="pc-sub">{plus ? 'ありがとうございます。すべてのスタンプと着せ替えが使えます' : 'スタンプ全種・着せ替え・色に名前・まとめ通知・自動バックアップ'}</span>
+          {!plus && <span className="pc-price">買い切り {p.billing.status === 'ready' && p.billing.price ? p.billing.price : '¥500'}</span>}
+        </span>
+        {!plus && <ChevronR />}
+        <Art name="pay_right" className="pc-deco" />
       </button>
 
-      <h3 className="sec">表示</h3>
+      <h3 className="sec">カレンダーの表示</h3>
       <div className="group">
-        <div className="row-item">
+        <div className="row-item icon-row">
+          <Art name="ic_holiday" className="row-ic" />
+          <span>
+            祝日・振替休日
+            <small>日本の祝日を表示(端末内で計算しています)</small>
+          </span>
+          <span className="always">いつも表示</span>
+        </div>
+        <label className="row-item icon-row">
+          <Art name="ic_rokuyo" className="row-ic" />
+          <span>
+            六曜
+            <small>大安・仏滅などを月の表に出す</small>
+          </span>
+          <input type="checkbox" className="switch" checked={s.showRokuyo} onChange={(e) => set({ showRokuyo: e.target.checked })} />
+        </label>
+        <div className="row-item icon-row">
+          <Art name="ic_moon" className="row-ic" />
+          <span>
+            旧暦
+            <small>選んだ日の欄に旧暦の月日を表示</small>
+          </span>
+          <span className="always">いつも表示</span>
+        </div>
+        <div className="row-item icon-row">
+          <span className="row-ic svg">
+            <CalendarIcon />
+          </span>
           <span>週の始まり</span>
           <div className="seg">
             <button className={s.weekStart === 0 ? 'on' : ''} onClick={() => set({ weekStart: 0 })}>
@@ -70,26 +111,35 @@ export function SettingsPage(p: {
             </button>
           </div>
         </div>
-        <label className="row-item">
-          <span>六曜(大安・仏滅など)を出す</span>
-          <input type="checkbox" className="switch" checked={s.showRokuyo} onChange={(e) => set({ showRokuyo: e.target.checked })} />
-        </label>
+      </div>
+      <div className="info-card">
+        <Art name="sprig_leaf" className="info-sprig" />
+        <p>
+          祝日・振替休日・六曜・旧暦は、インターネットを使わず端末内で計算しています。
+          <b>電波が無くても表示できます。</b>
+        </p>
       </div>
 
-      <h3 className="sec">着せ替え</h3>
+      <h3 className="sec">
+        着せ替え <span className="sec-note">{THEMES.length}種類</span>
+      </h3>
       <div className="themes">
         {THEMES.map((t) => {
           const can = t.free || plus;
+          const on = s.theme === t.id;
           return (
-            <button
-              key={t.id}
-              className={`theme ${s.theme === t.id ? 'on' : ''}`}
-              onClick={() => (can ? set({ theme: t.id }) : p.onPaywall())}
-              style={{ background: t.vars['--bg'], color: t.vars['--ink'], borderColor: s.theme === t.id ? t.vars['--accent'] : t.vars['--line'] }}
-              aria-label={`${t.name}${can ? '' : '(ひよりプラス)'}`}
-            >
-              <span className="theme-dot" style={{ background: t.vars['--accent'] }} />
-              <span>{t.name}</span>
+            <button key={t.id} className={`theme ${on ? 'on' : ''}`} onClick={() => (can ? set({ theme: t.id }) : p.onPaywall())} aria-label={`${t.name}${can ? '' : '(ひよりプラス)'}`}>
+              <span className="theme-art" style={{ backgroundImage: `url(${artUrl(t.art)})` }}>
+                <span className="theme-chip" style={{ background: t.vars['--bg'], borderColor: t.vars['--line'] }}>
+                  <i style={{ background: t.vars['--accent'] }} />
+                </span>
+                {on && (
+                  <span className="theme-check">
+                    <CheckIcon size={13} />
+                  </span>
+                )}
+              </span>
+              <span className="theme-name">{t.name}</span>
               {!can && <span className="lock">プラス</span>}
             </button>
           );
@@ -97,15 +147,16 @@ export function SettingsPage(p: {
       </div>
 
       <h3 className="sec">色の名前 {!plus && <span className="lock inline">プラス</span>}</h3>
-      <div className="group colors-names">
-        {COLORS.map((c, i) => (
-          <label key={c.key} className="row-item">
-            <span className="cn-dot" style={{ background: c.hex }} />
+      <div className="color-grid">
+        {COLOR_ORDER.map((i) => (
+          <label key={COLORS[i].key} className="cn-item">
+            <span className="cn-ball" style={{ background: COLORS[i].hex }} />
             <input
               className="cn-input"
               value={s.colorNames[i]}
               disabled={!plus}
               maxLength={12}
+              aria-label={`${COLORS[i].name}の名前`}
               onChange={(e) => {
                 const names = [...s.colorNames];
                 names[i] = e.target.value;
@@ -115,16 +166,19 @@ export function SettingsPage(p: {
             />
           </label>
         ))}
-        {!plus && (
-          <button className="row-item link-row" onClick={p.onPaywall}>
-            色に「仕事」「家族」などの名前を付ける
-          </button>
-        )}
       </div>
+      {!plus && (
+        <button className="link pad" onClick={p.onPaywall}>
+          色に「仕事」「家族」などの名前を付ける
+        </button>
+      )}
 
       <h3 className="sec">お知らせ</h3>
       <div className="group">
-        <div className="row-item">
+        <div className="row-item icon-row">
+          <span className="row-ic svg">
+            <BellIcon />
+          </span>
           <span>新しい予定のお知らせ</span>
           <select value={s.defaultNotify === null ? '' : String(s.defaultNotify)} onChange={(e) => set({ defaultNotify: e.target.value === '' ? null : Number(e.target.value) })}>
             {NOTIFY_TIMED.map((o) => (
@@ -134,7 +188,8 @@ export function SettingsPage(p: {
             ))}
           </select>
         </div>
-        <div className="row-item">
+        <div className="row-item icon-row">
+          <Art name="ic_bell" className="row-ic plain" />
           <span>
             今日の予定のまとめ {!plus && <span className="lock inline">プラス</span>}
             <small>予定のある日の朝に、その日の予定を一覧でお知らせ</small>
@@ -159,23 +214,49 @@ export function SettingsPage(p: {
       </div>
 
       <h3 className="sec">バックアップ・引っ越し</h3>
+      <div className="backup-hero">
+        <Art name="book_scene" className="bh-art" />
+        <p>
+          大切な記録を
+          <br />
+          ずっと残せるように
+          <br />
+          バックアップしておきましょう。
+        </p>
+      </div>
       <div className="group">
-        <button className="row-item link-row" onClick={() => void exportBackup(p.data).then((n) => p.toast(`${n} を書き出しました`))}>
-          バックアップを書き出す(予定 {p.count}件)
+        <button className="row-item icon-row" onClick={() => void exportBackup(p.data).then((n) => p.toast(`${n} を書き出しました`))}>
+          <Art name="ic_export" className="row-ic" />
+          <span>
+            バックアップを書き出す
+            <small>予定 {p.count}件・メモ・設定をファイルに書き出します</small>
+          </span>
+          <ChevronR size={18} />
         </button>
-        <button className="row-item link-row" onClick={() => fileRef.current?.click()}>
-          バックアップから読み込む
+        <button className="row-item icon-row" onClick={() => fileRef.current?.click()}>
+          <Art name="ic_import" className="row-ic" />
+          <span>
+            バックアップから読み込む
+            <small>書き出したファイルから戻します</small>
+          </span>
+          <ChevronR size={18} />
         </button>
         <input ref={fileRef} type="file" accept="application/json,.json" hidden data-testid="backup-file" onChange={(e) => void onFile(e.target.files?.[0])} />
-        <div className="row-item">
+        <div className="row-item icon-row">
+          <Art name="ic_device" className="row-ic" />
           <span>
             自動バックアップ {!plus && <span className="lock inline">プラス</span>}
             <small>1日1回、端末の「ファイル」に7日分を残します{s.lastAutoBackup ? `(最後: ${s.lastAutoBackup})` : ''}</small>
           </span>
           <input type="checkbox" className="switch" checked={plus && s.autoBackup} onChange={needPlus(() => set({ autoBackup: !s.autoBackup }))} />
         </div>
+      </div>
+
+      <h3 className="sec">端末のカレンダー</h3>
+      <div className="group">
+        <Art name="import_scene" className="import-art" />
         <button
-          className="row-item link-row"
+          className="row-item icon-row"
           disabled={busy}
           onClick={async () => {
             setBusy(true);
@@ -186,15 +267,22 @@ export function SettingsPage(p: {
             p.toast(r.events.length ? `${r.events.length}件の予定を読み込みました` : '新しく読み込む予定はありませんでした');
           }}
         >
-          {busy ? '読み込み中…' : '端末のカレンダーから予定を読み込む'}
-          <small>iPhone のカレンダー・Google カレンダーなど(前後1〜2年分)</small>
+          <span className="row-ic svg">
+            <CalendarIcon />
+          </span>
+          <span>
+            {busy ? '読み込み中…' : '端末のカレンダーから予定を読み込む'}
+            <small>{deviceCalendarNote()}</small>
+          </span>
+          <ChevronR size={18} />
         </button>
       </div>
 
       <h3 className="sec">このアプリについて</h3>
       <div className="group">
-        <button className="row-item link-row" onClick={() => setShowPrivacy(!showPrivacy)}>
-          プライバシーポリシー
+        <button className="row-item" onClick={() => setShowPrivacy(!showPrivacy)}>
+          <span>プライバシーポリシー</span>
+          <ChevronR size={18} />
         </button>
         {showPrivacy && <div className="privacy">{PRIVACY_TEXT}</div>}
         <div className="row-item about">
@@ -217,10 +305,15 @@ export function SettingsPage(p: {
           </div>
         )}
       </div>
+      <div className="foot-deco">
+        <Art name="flowers_bottom" className="fd-l" />
+        <Art name="sparrow" className="fd-r" />
+      </div>
 
       {pending && (
         <div className="ask-back" onClick={() => setPending(null)}>
           <div className="ask" onClick={(e) => e.stopPropagation()}>
+            <p className="ask-title">バックアップの読み込み</p>
             <p>
               バックアップに予定が {pending.events.length}件、メモが {Object.keys(pending.dayMemos).length}件あります。どう読み込みますか?
             </p>
@@ -244,7 +337,7 @@ export function SettingsPage(p: {
             >
               今の予定を消して置き換える
             </button>
-            <button className="link" onClick={() => setPending(null)}>
+            <button className="btn wide ghost-fill" onClick={() => setPending(null)}>
               やめる
             </button>
           </div>

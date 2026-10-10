@@ -10,6 +10,8 @@ export interface Stamp {
   bg?: string; // 文字スタンプの丸の色
   free: boolean;
   cat: string;
+  /** 水彩の絵(public/art/ の名前)。あればこの絵で出す */
+  img?: string;
 }
 
 const T = (id: string, glyph: string, label: string, bg: string, free: boolean): Stamp => ({ id, glyph, label, kind: 'text', bg, free, cat: '文字' });
@@ -93,6 +95,23 @@ export const STAMPS: Stamp[] = [
 
 export const STAMP_CATS = ['文字', '予定', 'からだ', 'あそび', 'きせつ', 'きもち'];
 
+/** 水彩の絵があるスタンプ(見本の絵から切り出した物。public/art/st_*.webp) */
+const ART: Record<string, string> = {
+  't-osoban': 'st_osoban', 't-kyuryo': 'st_moneybag', 't-zaitaku': 'st_laptop',
+  'e-birthday': 'st_cake', 'e-hospital': 'st_stethoscope', 'e-medicine': 'st_medicine', 'e-travel': 'st_plane',
+  'e-meal': 'st_fork', 'e-drink': 'st_beers', 'e-shopping': 'st_basket', 'e-study': 'st_book', 'e-heart': 'st_heart',
+  'e-cafe': 'st_coffee', 'e-gift': 'st_gift', 'e-party': 'st_popper', 'e-pencil': 'st_pencil', 'e-briefcase': 'st_briefcase',
+  'e-house': 'st_house', 'b-gym': 'st_dumbbell', 'b-sleep': 'st_moon', 'b-spa': 'st_bath',
+  'p-book': 'st_book2', 'p-camera': 'st_camera', 'p-music': 'st_music', 'p-game': 'st_game',
+  's-sakura': 'st_sakura', 's-sun': 'st_sunflower', 's-leaf': 'st_maple', 's-snow': 'st_snow', 's-xmas': 'st_xmas', 's-pumpkin': 'st_pumpkin',
+  'k-cat': 'st_cat', 'k-paw': 'st_paw', 'k-smile': 'st_smile', 'k-sparkle': 'st_sparkle', 'k-clover': 'st_clover',
+};
+for (const s of STAMPS) if (ART[s.id]) s.img = ART[s.id];
+
+export function artUrl(name: string): string {
+  return `${import.meta.env.BASE_URL}art/${name}.webp`;
+}
+
 const byId = new Map(STAMPS.map((s) => [s.id, s]));
 export function stampById(id?: string): Stamp | undefined {
   return id ? byId.get(id) : undefined;
@@ -106,19 +125,21 @@ export interface Theme {
   name: string;
   free: boolean;
   dark?: boolean;
+  /** 着せ替えを選ぶ所に出す水彩の絵(public/art/th_*.webp) */
+  art: string;
   vars: Record<string, string>;
 }
 
-const base = { '--sun': '#d9444b', '--sat': '#3d78c9' };
+const base = { '--sun': '#d4594b', '--sat': '#4677c2' };
 export const THEMES: Theme[] = [
-  { id: 'kinari', name: 'きなり', free: true, vars: { ...base, '--bg': '#fbf8f1', '--card': '#ffffff', '--ink': '#2f2a24', '--sub': '#7a7064', '--line': '#e7dfd2', '--accent': '#d9822b', '--accent-ink': '#ffffff', '--today': '#fff1d6', '--head': '#f4ede1' } },
-  { id: 'yoru', name: 'よる', free: true, dark: true, vars: { '--sun': '#ff7a80', '--sat': '#79a8ff', '--bg': '#16181d', '--card': '#1f2229', '--ink': '#eceae6', '--sub': '#a3a39f', '--line': '#30343d', '--accent': '#f0a24a', '--accent-ink': '#1a1a1a', '--today': '#3a3122', '--head': '#23262e' } },
-  { id: 'sakura', name: 'さくら', free: false, vars: { ...base, '--bg': '#fff6f8', '--card': '#ffffff', '--ink': '#3b2a30', '--sub': '#8d6f78', '--line': '#f3dbe2', '--accent': '#e0668c', '--accent-ink': '#ffffff', '--today': '#ffe3ec', '--head': '#fde9ef' } },
-  { id: 'wakaba', name: 'わかば', free: false, vars: { ...base, '--bg': '#f5faf1', '--card': '#ffffff', '--ink': '#25331f', '--sub': '#62735a', '--line': '#dbe8d2', '--accent': '#5c9e3f', '--accent-ink': '#ffffff', '--today': '#e5f4d9', '--head': '#e9f3e1' } },
-  { id: 'sora', name: 'そら', free: false, vars: { ...base, '--bg': '#f2f7fd', '--card': '#ffffff', '--ink': '#1f2b3a', '--sub': '#5d6d80', '--line': '#d7e3f1', '--accent': '#3b82d6', '--accent-ink': '#ffffff', '--today': '#dcebfb', '--head': '#e4eefa' } },
-  { id: 'fuji', name: 'ふじ', free: false, vars: { ...base, '--bg': '#f8f5fc', '--card': '#ffffff', '--ink': '#2d2638', '--sub': '#716685', '--line': '#e3dbef', '--accent': '#8a63c9', '--accent-ink': '#ffffff', '--today': '#ece3f8', '--head': '#efe8f8' } },
-  { id: 'kurumi', name: 'くるみ', free: false, vars: { ...base, '--bg': '#f6f0e8', '--card': '#fffaf3', '--ink': '#3a2a1c', '--sub': '#7d6650', '--line': '#e4d5c2', '--accent': '#8b5a2b', '--accent-ink': '#ffffff', '--today': '#f1e0c8', '--head': '#eee2d2' } },
-  { id: 'sumi', name: 'すみ', free: false, vars: { ...base, '--bg': '#f4f4f2', '--card': '#ffffff', '--ink': '#1d1d1b', '--sub': '#6b6b66', '--line': '#dddcd7', '--accent': '#333331', '--accent-ink': '#ffffff', '--today': '#e9e8e2', '--head': '#ebeae6' } },
+  { id: 'kinari', name: 'きなり', free: true, art: 'th_neko', vars: { ...base, '--bg': '#f7f0e5', '--card': '#fffbf5', '--ink': '#4a3b31', '--sub': '#8c7b6c', '--line': '#ebdfcf', '--accent': '#c0675a', '--accent-ink': '#ffffff', '--today': '#fbe3d6', '--head': '#f3e9db' } },
+  { id: 'yoru', name: 'よる', free: true, dark: true, art: 'th_yoru', vars: { '--sun': '#f08c80', '--sat': '#8fb2ef', '--bg': '#1c1f2b', '--card': '#262a38', '--ink': '#efe9df', '--sub': '#aaa69d', '--line': '#363b4c', '--accent': '#e3a37f', '--accent-ink': '#1d1b1a', '--today': '#3b3446', '--head': '#232735' } },
+  { id: 'sakura', name: 'さくら', free: false, art: 'th_kotori', vars: { ...base, '--bg': '#fbf0f0', '--card': '#fffafa', '--ink': '#4a3236', '--sub': '#94767b', '--line': '#f1dcdd', '--accent': '#d27384', '--accent-ink': '#ffffff', '--today': '#fbdde2', '--head': '#f8e6e7' } },
+  { id: 'wakaba', name: 'わかば', free: false, art: 'th_mori', vars: { ...base, '--bg': '#f2f4e8', '--card': '#fdfdf6', '--ink': '#34402b', '--sub': '#6f7b62', '--line': '#dde5cd', '--accent': '#6f9a55', '--accent-ink': '#ffffff', '--today': '#e3eed2', '--head': '#e9efdc' } },
+  { id: 'sora', name: 'そら', free: false, art: 'th_aozora', vars: { ...base, '--bg': '#eef4f9', '--card': '#fbfdff', '--ink': '#2e3d4d', '--sub': '#6b7d90', '--line': '#d8e4ef', '--accent': '#5b8fc9', '--accent-ink': '#ffffff', '--today': '#dceaf8', '--head': '#e4eef7' } },
+  { id: 'fuji', name: 'ふじ', free: false, art: 'th_yasashii', vars: { ...base, '--bg': '#f5f1f8', '--card': '#fdfbff', '--ink': '#3d3349', '--sub': '#7c7089', '--line': '#e5dcee', '--accent': '#8f74c0', '--accent-ink': '#ffffff', '--today': '#ebe2f6', '--head': '#eee8f5' } },
+  { id: 'kurumi', name: 'くるみ', free: false, art: 'th_cafe', vars: { ...base, '--bg': '#f4ebe0', '--card': '#fffaf2', '--ink': '#45311f', '--sub': '#866c55', '--line': '#e6d6c3', '--accent': '#9a6a43', '--accent-ink': '#ffffff', '--today': '#f0dcc4', '--head': '#eee0cf' } },
+  { id: 'sumi', name: 'すみ', free: false, art: 'th_wa', vars: { ...base, '--bg': '#f3f1ed', '--card': '#fdfcfa', '--ink': '#2c2a27', '--sub': '#6d6964', '--line': '#e0ddd6', '--accent': '#4f4a45', '--accent-ink': '#ffffff', '--today': '#e9e5dd', '--head': '#ebe8e2' } },
 ];
 
 export function themeById(id: string): Theme {

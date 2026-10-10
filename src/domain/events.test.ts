@@ -143,6 +143,13 @@ describe('バックアップの読み込み', () => {
     const back = normalize(JSON.parse(JSON.stringify(data)));
     expect(back).toEqual(data);
   });
+  test('1.0 の色の名前: 既定のままなら新しい9色の名前に、付けた名前はそのまま', () => {
+    const old = ['あか', 'だいだい', 'きいろ', 'しごと', 'あおみどり', 'あお', 'むらさき', 'ももいろ', 'はいいろ'];
+    const n = normalize({ events: [{ date: '2026-10-04', title: 'a', color: 7 }], settings: { colorNames: old } });
+    expect(n.settings.colorNames).toEqual(['もも', 'みかん', 'たんぽぽ', 'しごと', 'あじさい', 'そら', '藤', 'さくら', '生成り']);
+    expect(n.events[0].color).toBe(7); // 番号はそのまま(ももいろ → さくら)
+    expect(emptyData().settings.colorNames).toContain('さくら');
+  });
   test('壊れたファイル・他のアプリの JSON でも落ちない', () => {
     expect(normalize(null).events).toEqual([]);
     expect(normalize({ events: [{ title: 1 }, { date: 'x', title: 'a' }, { date: '2026-01-01', title: 'ok', start: '25:00', color: 99 }] }).events).toMatchObject([{ title: 'ok', allDay: true, start: undefined, color: 8 }]);

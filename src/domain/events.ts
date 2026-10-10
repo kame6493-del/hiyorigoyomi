@@ -1,17 +1,25 @@
 import { addDays, daysInMonth, isLeap, parse, toDays, weekday, ymd, type YMD } from './date';
 import type { AppData, CalEvent, Occurrence, Repeat, Settings } from './types';
 
+/**
+ * 予定の色。保存しているのは番号(0〜8)なので、番号の意味は前の版と同じ並び(赤→もも、橙→みかん …灰→生成り)に
+ * 近い色を当てた。画面に並べる順は COLOR_ORDER(見本どおり さくら・もも・みかん…)。
+ */
 export const COLORS = [
-  { key: 'red', hex: '#e8555b', name: 'あか' },
-  { key: 'orange', hex: '#f08a3c', name: 'だいだい' },
-  { key: 'yellow', hex: '#e2b53a', name: 'きいろ' },
-  { key: 'green', hex: '#4fae6b', name: 'みどり' },
-  { key: 'teal', hex: '#36a9a1', name: 'あおみどり' },
-  { key: 'blue', hex: '#4a86d8', name: 'あお' },
-  { key: 'purple', hex: '#9a6fd0', name: 'むらさき' },
-  { key: 'pink', hex: '#e46fa6', name: 'ももいろ' },
-  { key: 'gray', hex: '#8a8f98', name: 'はいいろ' },
+  { key: 'momo', hex: '#ec9f8c', name: 'もも' },
+  { key: 'mikan', hex: '#f0b073', name: 'みかん' },
+  { key: 'tanpopo', hex: '#f1cf68', name: 'たんぽぽ' },
+  { key: 'wakaba', hex: '#9fc58c', name: '若葉' },
+  { key: 'ajisai', hex: '#a3a6e6', name: 'あじさい' },
+  { key: 'sora', hex: '#8fbfe6', name: 'そら' },
+  { key: 'fuji', hex: '#ad93d2', name: '藤' },
+  { key: 'sakura', hex: '#efa8b2', name: 'さくら' },
+  { key: 'kinari', hex: '#cfc2aa', name: '生成り' },
 ] as const;
+/** 画面での並び(見本のデザインシステムの順) */
+export const COLOR_ORDER = [7, 0, 1, 2, 3, 5, 4, 6, 8] as const;
+/** 1.0 のときの既定の色の名前。名前を変えていなければ新しい名前に読み替える */
+export const OLD_COLOR_NAMES = ['あか', 'だいだい', 'きいろ', 'みどり', 'あおみどり', 'あお', 'むらさき', 'ももいろ', 'はいいろ'];
 
 export function defaultSettings(): Settings {
   return {
@@ -316,7 +324,10 @@ export function normalize(x: unknown): AppData {
     weekStart: s.weekStart === 1 ? 1 : 0,
     showRokuyo: s.showRokuyo !== false,
     theme: typeof s.theme === 'string' ? s.theme : base.settings.theme,
-    colorNames: Array.isArray(s.colorNames) && s.colorNames.length === COLORS.length ? s.colorNames.map((n, i) => (typeof n === 'string' && n.trim() ? n.slice(0, 12) : COLORS[i].name)) : base.settings.colorNames,
+    colorNames:
+      Array.isArray(s.colorNames) && s.colorNames.length === COLORS.length
+        ? s.colorNames.map((n, i) => (typeof n === 'string' && n.trim() && n !== OLD_COLOR_NAMES[i] ? n.slice(0, 12) : COLORS[i].name))
+        : base.settings.colorNames,
     defaultNotify: typeof s.defaultNotify === 'number' ? s.defaultNotify : null,
     digest: s.digest && typeof s.digest === 'object' && HHMM.test(String(s.digest.time)) ? { on: Boolean(s.digest.on), time: s.digest.time } : base.settings.digest,
     autoBackup: Boolean(s.autoBackup),

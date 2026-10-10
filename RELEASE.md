@@ -122,3 +122,18 @@ X は旧Yahoo!カレンダー/LINEカレンダーに触れた投稿 63件(10-01�
 - クローズドテスト Alpha(トラック 4700761072959437283): 日本・テスター AndroidClosedJP と nigatecho-testers・フィードバック kame6493@gmail.com
 - 2026-10-04 審査に送信(14件)。申告: 広告なし/ログイン不要/18歳以上/レーティング3歳以上/データセーフティ=購入履歴のみ/広告ID なし/行政 いいえ/金融なし/健康なし。ストア設定 仕事効率化
 - 1.0.1 (vc2): RevenueCat Android キー入り。AAB: C:\Users\yuichi1\Downloads\ひよりごよみ_2026-10-03\app\releases\hiyorigoyomi-1.0.1-vc2-release.aab (6.71 MB, 7,032,089 バイト)
+
+## 1.1.0 (vc3) 見た目の作り直し(2026-10-10)
+
+持ち主の指示で、ChatGPT に作らせた UI 参考画像(Downloads\hiyori_ref_2・3 と hiyori_all_4〜8、アイコンは hiyori_ref_1 を正方形にした物)に見た目を寄せた。機能と課金(ひよりプラス・hiyori_plus_lifetime・¥500・中身)は変えていない。iOS は出し直さない(ASC は触っていない。iOS の写真 store/ios/ も前のまま)。
+
+- 絵: 見本から切り出してそのまま使った(水彩の花・すずめ・猫・女の子と窓辺・スタンプ 36種・設定の丸い絵記号・着せ替えの絵 8枚)。work/redesign/cut_assets.py → public/art/*.webp。新しく描いたのは線の絵記号(src/ui/icons.tsx)だけ
+- 字: Zen Maru Gothic(OFL)を JIS 第1水準+画面の字に絞って public/fonts/ に(work/redesign/make_fonts.py。元の ttf は こつびん の scripts/fonts から写した物で git には入れていない)
+- 画面: はじめての画面+使いかたガイド3枚 / 月の表(ロゴの見出し・スタンプ入力・マスにスタンプを大きく・下のメニュー5つ)/ 空の月(まだ予定がありません・はじめのスタンプ4つ)/ スタンプを選ぶ(全面・よく使う・最近使ったスタンプ)/ 予定の編集(全面・行を押すと開く・くり返しは見本の6択)/ くり返しの保存・削除の確認(丸い選択肢)/ 検索(すべて・予定・メモの絞り込み、よく入れる予定)/ 設定(絵記号つきの行・着せ替えを絵で・9色・バックアップの絵)/ ひよりプラス(冠・月桂樹・値段のカード)
+- 色: 見本の9色 さくら・もも・みかん・たんぽぽ・若葉・そら・あじさい・藤・生成り。保存している番号はそのまま(赤→もも、橙→みかん、黄→たんぽぽ、緑→若葉、青緑→あじさい、青→そら、紫→藤、桃→さくら、灰→生成り)。名前を変えていなければ古い既定名(あか…はいいろ)を新しい名前に読み替える(src/domain/events.ts normalize・テストあり)
+- 見本と違えた所: 見本にあって今無い機能は出していない(まとめ・やること・ドラッグで塗る・前週を使う・気分・写真・クラウド保存・iCloud/Outlook の選択・書き忘れリマインド・キャンペーン通知・スタンプのカテゴリ名)。下のメニューは「まとめ・やること」の代わりに「さがす・スタンプ」
+- アイコン: scripts/make_icons.py(元絵 work/redesign/icon_src_1024.png)。Android 適応アイコンは前景=絵(縁を紙色へぼかす)・背景=紙色 #F8F0E2。安全域の確認 work/redesign/icon_check.png
+- 前の版の素材は store/archive_v1_2026-10-10/ に退避
+- AAB: releases\hiyorigoyomi-1.1.0-vc3-release.aab(9,746,021 バイト・既存の鍵・SHA256 8D:F1:59:…:0D:69 で vc2 と同じ)。10MB を超えたのでスプラッシュを128色にし、ストア画像だけで使う絵は work/redesign/art_store/ へ外した
+- 確かめたこと: vitest 119件、build、E2E(python scripts/e2e.py が 375・430 幅の2回、--plus も2回)ALL PASS・コンソールのエラー0、録画ツアー(src/dev/reviewTour.ts)も新しい画面に合わせて購入画面まで進むのを確認。比較画像 docs\compare_redesign_*.png と docs\compare_redesign_all.png(python scripts/compare_redesign.py。git には入れていない)
+- Play 素材: store/play/shot_1〜6.png(1080x1920)・feature.png・icon-512.png(python scripts/store_shots.py)。値段・「無料」・iPhone だけの機能は写していない
