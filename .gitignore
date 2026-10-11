@@ -46,3 +46,12 @@ work/redesign/fonts/*.ttf
 work/redesign/*.png
 !work/redesign/icon_src_1024.png
 docs/compare_redesign_*.png
+
+# 宣伝の動画・サムネ(ずんだもんの立ち絵を合成するので公開リポジトリに入れない)
+store/promo/
+store/_cream_backup_*/promo/
+
+# 他のサイトのページの写し(国立天文台・内閣府)は入れない。祝日の CSV は公開データなので残す
+work/naoj/
+work/naoj_*.html
+work/cao_*.html
